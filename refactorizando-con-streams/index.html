@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Hoy traigo una serie de ejemplos de refactorización a modo de introducción a las nuevas características funcionales de Java 8. Así que, si tenías curi"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Jose M. Deniz"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Refactorizando con Streams"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Hoy traigo una serie de ejemplos de refactorización a modo de introducción a las nuevas características funcionales de Java 8. Así que, si tenías curi"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="An Apprentice Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Refactorizando con Streams - An Apprentice Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">JoseDeniz Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Refactorizando con Streams</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2015-10-08
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Java/">#Java</a> <a href="/tags/Java8/">#Java8</a> <a href="/tags/Refactor/">#Refactor</a> <a href="/tags/Stream/">#Stream</a> <a href="/tags/Tell-Don-t-Ask/">#Tell-Don't-Ask</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Java-8/">Java 8</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Hoy traigo una serie de ejemplos de refactorización a modo de introducción a las nuevas características funcionales de Java 8. Así que, si tenías curiosidad y no te habías atrevido a experimentar con ellas, ¡te animo a que pruebes!</p>
+<p>Empezamos definiendo una clase <em>Person</em> básica con un nombre y una edad:</p>
+<script src="https://gist.github.com/JoseDeniz/344e58dfff22f2d16aefc42164497b75.js"></script>
+
+<p>Una vez definida nuestra clase base, vamos a hacer un ejemplo sencillo: tenemos una lista de personas y queremos tener otra lista pero <strong>sólo</strong> con las personas que sean <strong>mayores de 22 años</strong>.</p>
+<script src="https://gist.github.com/JoseDeniz/fb5a3686398d3ff9e9227156f9483243.js"></script>
+
+<p>Y ahora usando Java 8:</p>
+<script src="https://gist.github.com/JoseDeniz/829395eb3f436c05b8f17cbaae7e3ae1.js"></script>
+
+<p>Vamos a explicarlo un poco. Primero tenemos el método <strong><em>stream()</em></strong>, propio de las colecciones, que devuelve un <em><strong>Stream</strong></em> (conjunto inmutable de elementos y una serie de funciones con las que operar sobre el mismo). Seguimos con la función <strong><em>filter</em></strong> que, como su nombre indica, filtra los elementos a partir de un <strong>predicado</strong> (función que evalúa un argumento siendo el resultado <em>verdadero</em> o <em>falso).</em> Y por último_,_ tenemos que volver a transformar el <em>stream</em> en una lista, por lo que llamamos a la función <strong><em>collect</em></strong> y nos ayudamos de los <em><strong>Collectors</strong></em> para ello.</p>
+<p>Podemos extraer el predicado en una variable para tener una mejor legibilidad:</p>
+<script src="https://gist.github.com/JoseDeniz/ca04c573d4160ff0b2362f69c68eaeeb.js"></script>
+
+<p>Ahora pongamos otro ejemplo. Seguimos teniendo la misma lista de personas pero ahora queremos un <strong>String</strong> que contenga los <strong>nombres</strong> de las personas que sean <strong>menores de 22 años</strong> separados por <strong>“, “</strong>.</p>
+<p>Java 7:</p>
+<script src="https://gist.github.com/JoseDeniz/7c73cbb487ff2f03ebdaa90776fe37ef.js"></script>
+
+<p>Java 8:</p>
+<script src="https://gist.github.com/JoseDeniz/fc9c7fb1309607d9dfb33dc6d149331a.js"></script>
+
+<p>En este ejemplo, vemos varias cosas nuevas como la función <em><strong>map</strong></em>, que devuelve un nuevo <em>Stream</em> del mismo tamaño, pero con la diferencia que cada elemento es el resultado de aplicar la función pasada por parámetro sobre cada uno de ellos (en este caso, me devuelve un <em>Stream&lt;String&gt;</em>. Además, vemos como podemos sustituir nuestra función <em>lambda</em> por una referencia al método, es  decir, hemos sustituído:</p>
+<pre><code>person -&gt; person.name() por Person::name
+</code></pre>
+<p>Ya que queda más compacto y fácil de leer. Y por último, unimos todos los nombres separados por <strong>“, “</strong> sin tener que estar preocupándonos en si se nos añade o no una <strong>“, “</strong> de más.</p>
+<p>A modo de conclusión, me gusta más ésta forma de programar declarativamente, ya que mejora mucho la legibilidad del código e incluso es más fácil de mantener. Ya vimos por ejemplo que, para reducir la lista de personas a una lista de nombres, bastó con añadir una línea llamando a la función <em>map</em> y listo.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+    <hr />
+    <h3>Comments:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/JoseDeniz13" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/JoseDeniz/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/jose-manuel-deniz-suarez/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Jose M. Deniz<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'josedenizblog';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+
+</html>

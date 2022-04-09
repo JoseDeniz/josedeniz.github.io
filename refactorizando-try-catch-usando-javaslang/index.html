@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Hace unos días, empecé un proyecto personal para mejorar algunas tecnologías, como por ejemplo, conexión con bases de datos o trabajar con Spark para "/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Jose M. Deniz"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Refactorizando Try - Catch usando Javaslang"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Hace unos días, empecé un proyecto personal para mejorar algunas tecnologías, como por ejemplo, conexión con bases de datos o trabajar con Spark para "/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="An Apprentice Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Refactorizando Try - Catch usando Javaslang - An Apprentice Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">JoseDeniz Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Refactorizando Try - Catch usando Javaslang</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2015-12-15
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Java/">#Java</a> <a href="/tags/Java8/">#Java8</a> <a href="/tags/catch/">#catch</a> <a href="/tags/functional-programming/">#functional programming</a> <a href="/tags/javaslang/">#javaslang</a> <a href="/tags/monad/">#monad</a> <a href="/tags/try/">#try</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Java/">Java</a>/ <a href="/categories/Java/Java-8/">Java 8</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Hace unos días, empecé un proyecto personal para mejorar algunas tecnologías, como por ejemplo, conexión con bases de datos o trabajar con <a target="_blank" rel="noopener" href="http://sparkjava.com/">Spark</a> para hacer un servicio Rest.</p>
+<p>Empecé con una idea muy sencilla, ya que lo que quería era empezar cuanto antes y, más adelante, ir incorporando nuevas <em>features</em> y encontrarme con problemas como ¿por qué hice esto de esta forma y no de esta otra?, ó también, “por tomar una determinada decisión me ha surgido un problema grande a la larga”.</p>
+<p>La idea principal, es tener una tienda online donde tendré usuarios y productos, donde los almacenaré en una base de datos y proporcionar un servicio Rest.</p>
+<p>Primero, empecé por hacer un CRUD usando JDBC donde tengo una tabla de usuarios:</p>
+<script src="https://gist.github.com/JoseDeniz/8071f5ae2ca64b277b8071e82618aa57.js"></script>
+
+<p>Y mi clase User:</p>
+<script src="https://gist.github.com/JoseDeniz/d69f3abb6d4524804155295b35aac763.js"></script>
+
+<p>Una vez implementado el CRUD y refactorizado el código, me encontré con que no me podía quitar los bloques de <em>try&#x2F;catch</em>, lo cuál me frustró mucho porque me parecían bastante verbosos. Pero, por casualidad o por cosas del destino, <a target="_blank" rel="noopener" href="https://twitter.com/rubendm23">Rubén</a> compartió unos vídeos sobre patrones de diseño con Java 8, de los que quiero destacar la <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K6BmGBzIqW0&amp;feature=youtu.be">charla</a> de <a target="_blank" rel="noopener" href="https://twitter.com/mariofusco">Mario Fusco</a>.</p>
+<p>Entre otras cosas, recomendó <a target="_blank" rel="noopener" href="http://javaslang.com/">javaslang</a>, una biblioteca funcional que añade, pequeñas, pero importantes mejoras a Java 8. Propone un ejemplo con la clase Try&lt;T&gt;, dicha clase es una mónada que puede devolver dos tipos de objetos: <em>Success</em> (objeto que contiene el valor) o <em>Failure</em> (objeto que contiene la excepción). Además, se le pueden aplicar funciones como <em>map</em> o <em>andThen</em>.</p>
+<p>Así era como se insertaba un usuario en la base de datos:</p>
+<script src="https://gist.github.com/JoseDeniz/1163a7bc7d9e19b39cd37ac1d18fe872.js"></script>
+
+<p>Y este es el método que establecía la conexión con la base de datos:</p>
+<script src="https://gist.github.com/JoseDeniz/55e8f82e7a3ae42e4885924410a3b293.js"></script>
+
+<p>¡Cuántos <em>try&#x2F;catch</em>! Vamos a refactorizar para dejar un código más limpio y legible donde cualquier persona pueda leerlo y tener una idea de cómo funciona con solo echarle un vistazo. Empecemos con el método que establecía la conexión:</p>
+<script src="https://gist.github.com/JoseDeniz/f681f1e2118c0a229ef5e20822d7fcfb.js"></script>
+
+<p>Y finalmente, con el método que inserta, extrayendo más métodos para dejar el código más limpio y legible.</p>
+<script src="https://gist.github.com/JoseDeniz/12953edfb24a89c35ebcf0b1e991107e.js"></script>
+
+<p>En caso de que querramos controlar las excepciones, basta con llamar a la función <strong>onFailure(Consumer&lt;Throwable&gt;)</strong>. Por ejemplo:</p>
+<script src="https://gist.github.com/JoseDeniz/b88bbf58376cdd916eed7687e408be49.js"></script>
+
+<p>Personalmente, me ha gustado mucho haber descubierto esta manera de hacerlo, ya que me centro más en <strong>qué</strong> quiero hacer en vez de <strong>cómo</strong> lo quiero hacer. Y además, mejora muchísimo la legibilidad del código.</p>
+<p>Por último, me gustaría recordar que el proyecto es para aprender y cualquier <em>feedback</em> será muy bien recibido :D</p>
+<ul>
+<li>Link proyecto: <a target="_blank" rel="noopener" href="https://github.com/JoseDeniz/A2Ztore">GitHub</a></li>
+<li>Link: Otro <a target="_blank" rel="noopener" href="https://github.com/JoseDeniz/Java-8-Basic-Examples/blob/master/src/main/java/javaslang/try_monad_example/ReadLinesFromFileExample.java">ejemplo</a> usando la clase Try</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+    <hr />
+    <h3>Comments:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/JoseDeniz13" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/JoseDeniz/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/jose-manuel-deniz-suarez/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Jose M. Deniz<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'josedenizblog';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="There is a script on our project that downloads the translations from the internal translation tool to files inside a folder in the web project and th"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Jose M. Deniz"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Optimization of an algorithm"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="There is a script on our project that downloads the translations from the internal translation tool to files inside a folder in the web project and th"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="An Apprentice Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Optimization of an algorithm - An Apprentice Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">JoseDeniz Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Optimization of an algorithm</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2022-04-09
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>There is a script on our project that downloads the translations from the internal translation tool to files inside a folder in the web project and that takes long time (~10&#x2F;15min), so I decided to take a look to see what was happening. After a quick read I detected a fragment of code that had four nested loops, so my intuition told me that maybe there was a <em>bottleneck</em> here.</p>
+<p>The code had a similar structure to this (it’s simplified for a better understanding):</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$customTranslationsDataStructure</span> = [</span><br><span class="line">    <span class="string">&#x27;es_ES&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;MESSAGES&#x27;</span> =&gt; [</span><br><span class="line">                        <span class="string">&#x27;filename1&#x27;</span> =&gt;  [</span><br><span class="line">                                            <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                            <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                        ],</span><br><span class="line">                        <span class="string">&#x27;filename2&#x27;</span> =&gt;  [</span><br><span class="line">                                            <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                            <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                        ]</span><br><span class="line">                    ],</span><br><span class="line">    <span class="string">&#x27;en_US&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;MESSAGES&#x27;</span> =&gt; [</span><br><span class="line">                        <span class="string">&#x27;filename3&#x27;</span> =&gt;  [</span><br><span class="line">                                            <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                            <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                        ],</span><br><span class="line">                        <span class="string">&#x27;filename4&#x27;</span> =&gt;  [</span><br><span class="line">                                            <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                            <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                        ]</span><br><span class="line">                    ]</span><br><span class="line">    ]</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$customTranslationsDataStructure</span> <span class="keyword">as</span> <span class="variable">$locale</span> =&gt; <span class="variable">$subFolder</span>) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$subFolder</span> <span class="keyword">as</span> <span class="variable">$message</span> =&gt; <span class="variable">$files</span>) &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$files</span> <span class="keyword">as</span> <span class="variable">$file</span> =&gt; <span class="variable">$translations</span>) &#123;</span><br><span class="line">            <span class="variable">$fileName</span> = <span class="variable">$destinationPath</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$locale</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$subFolder</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">openFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>(<span class="variable">$fileName</span>, <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">getFileHeaders</span>());</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="variable">$translations</span> <span class="keyword">as</span> <span class="variable">$translationId</span> =&gt; <span class="variable">$translationValue</span>) &#123;</span><br><span class="line">                <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>(<span class="variable">$fileName</span>, <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">formatTranslation</span>(<span class="variable">$translationId</span>, <span class="variable">$translationValue</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">closeFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Prior to change anything, I decided to have metrics to confirm my searches and investigation so I included a few simple lines of code that prints me some system information like:</p>
+<ul>
+<li>Memory usage</li>
+<li>Memory peak usage</li>
+<li>Time execution</li>
+</ul>
+<p>Here are the results:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Total time in seconds&quot;</span>    <span class="punctuation">:</span>  <span class="number">597.04154491425</span><span class="punctuation">,</span>      # <span class="number">9</span><span class="punctuation">,</span><span class="number">95</span> min</span><br><span class="line">    <span class="attr">&quot;Function time in seconds&quot;</span> <span class="punctuation">:</span>  <span class="number">445.33128285408</span><span class="punctuation">,</span>      # <span class="number">7</span><span class="punctuation">,</span><span class="number">41667</span> min</span><br><span class="line">    <span class="attr">&quot;Peak memory usage in MB&quot;</span>  <span class="punctuation">:</span>  <span class="number">79.081642150879</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>In addition, I discovered that the <em>$subFolder</em> was a constant so the second loop always had <code>O(1)</code> and the complexity of the algorithm was <code>O(n) * O(1) * O(f) * O(t) = O(n * f * t)</code>. So, I wondered if I could reduce it to <code>O(n)</code> because if you read the code it can be simplified to “write a content in a translation file”.</p>
+<h2 id="Iteration-1"><a href="#Iteration-1" class="headerlink" title="Iteration 1:"></a>Iteration 1:</h2><p>For the first iteration I decided to <em>flatten</em> the keys of the array that represents the file path. By doing this I could remove two loops from the code.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$customTranslationsDataStructure</span> = [</span><br><span class="line">    <span class="string">&#x27;es_ES/MESSAGES/filename1&#x27;</span> =&gt; [</span><br><span class="line">                                    <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                    <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                  ],</span><br><span class="line">    <span class="string">&#x27;es_ES/MESSAGES/filename2&#x27;</span> =&gt; [</span><br><span class="line">                                    <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                    <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                  ]</span><br><span class="line">                                  ],</span><br><span class="line">    <span class="string">&#x27;en_US/MESSAGES/filename3&#x27;</span> =&gt; [</span><br><span class="line">                                    <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                    <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                  ]</span><br><span class="line">                                  ],</span><br><span class="line">    <span class="string">&#x27;en_US/MESSAGES/filename4&#x27;</span> =&gt; [</span><br><span class="line">                                    <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;translationValue1&#x27;</span>,</span><br><span class="line">                                    <span class="string">&#x27;translationId2&#x27;</span> =&gt; <span class="string">&#x27;translationValue2&#x27;</span></span><br><span class="line">                                  ]</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$customTranslationsDataStructure</span> <span class="keyword">as</span> <span class="variable">$file</span> =&gt; <span class="variable">$translations</span>) &#123;</span><br><span class="line">    <span class="variable">$fileName</span> = <span class="variable">$destinationPath</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">openFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>(<span class="variable">$fileName</span>, <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">getFileHeaders</span>());</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$translations</span> <span class="keyword">as</span> <span class="variable">$translationId</span> =&gt; <span class="variable">$translationValue</span>) &#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>(<span class="variable">$fileName</span>, <span class="variable">$this</span>-&gt;<span class="title function_ invoke__">formatTranslation</span>(<span class="variable">$translationId</span>, <span class="variable">$translationValue</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">closeFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Surprisingly for me, this “optimization” did not work. In fact it was almost the same duration and the <strong>use of memory</strong> increased.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Total time in seconds&quot;</span>    <span class="punctuation">:</span>  <span class="number">590.02654569548</span><span class="punctuation">,</span>      # <span class="number">9</span><span class="punctuation">,</span><span class="number">83</span> min vs <span class="number">9</span><span class="punctuation">,</span><span class="number">95</span> min</span><br><span class="line">    <span class="attr">&quot;Function time in seconds&quot;</span> <span class="punctuation">:</span>  <span class="number">405.33128285408</span><span class="punctuation">,</span>      # <span class="number">6</span><span class="punctuation">,</span><span class="number">75</span> min vs <span class="number">7</span><span class="punctuation">,</span><span class="number">41667</span> min</span><br><span class="line">    <span class="attr">&quot;Peak memory usage in MB&quot;</span>  <span class="punctuation">:</span>  <span class="number">83.700309753418</span>       # <span class="number">84</span> MB vs <span class="number">79</span> MB</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Iteration-2"><a href="#Iteration-2" class="headerlink" title="Iteration 2:"></a>Iteration 2:</h2><p>For the second iteration I decided to keep the <em>flatten</em> of the keys and change the value from an array to a string that represents the whole content of the file.</p>
+<blockquote>
+<p>Note: it implies to modify other loops that are actually executing to structure the data so I did not have to add more loops</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$customTranslationsDataStructure</span> = [</span><br><span class="line">    <span class="string">&#x27;es_ES/MESSAGES/filename1&#x27;</span> =&gt; <span class="string">&#x27;some string that represents the content of the file&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;es_ES/MESSAGES/filename2&#x27;</span> =&gt; <span class="string">&#x27;some string that represents the content of the file&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;en_US/MESSAGES/filename3&#x27;</span> =&gt; <span class="string">&#x27;some string that represents the content of the file&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;en_US/MESSAGES/filename4&#x27;</span> =&gt; <span class="string">&#x27;some string that represents the content of the file&#x27;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$customTranslationsDataStructure</span> <span class="keyword">as</span> <span class="variable">$file</span> =&gt; <span class="variable">$fileContent</span>) &#123;</span><br><span class="line">    <span class="variable">$fileName</span> = <span class="variable">$destinationPath</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">openFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>(<span class="variable">$fileName</span>, <span class="variable">$fileContent</span>);</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">closeFile</span>(<span class="variable">$fileName</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Benchmarks:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Total time in seconds&quot;</span>    <span class="punctuation">:</span>  <span class="number">201.28873109818</span><span class="punctuation">,</span>      # <span class="number">3</span><span class="punctuation">,</span><span class="number">35</span> min </span><br><span class="line">    <span class="attr">&quot;Function time in seconds&quot;</span> <span class="punctuation">:</span>  <span class="number">40.77</span><span class="punctuation">,</span>                # <span class="number">445</span>/<span class="number">40</span> ≈ x11 times faster</span><br><span class="line">    <span class="attr">&quot;Peak memory usage in MB&quot;</span>  <span class="punctuation">:</span>  <span class="number">91.849418640137</span>       # <span class="number">91</span>/<span class="number">79</span> ≈ x1<span class="punctuation">,</span><span class="number">15</span> increase of memory usage</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Aha! This actually worked as expected:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Reduced the loops to a single one <code>O(n)</code></li>
+<li><input checked="" disabled="" type="checkbox"> The total time was reduced significantly</li>
+<li><input checked="" disabled="" type="checkbox"> As extra, we simplified the I&#x2F;O actions from (t + 1) times to a single 1 for writing operations</li>
+</ul>
+<p>But as always, we have trade offs:</p>
+<ul>
+<li>The memory usage increased (but this is not a problem because is still low)</li>
+<li>The function that creates the <em>$customTranslationsDataStructure</em> with the content of the file increased a little (but not too much to worry about, it was less than 10s)</li>
+</ul>
+<h2 id="What-about-duplicated-translations"><a href="#What-about-duplicated-translations" class="headerlink" title="What about duplicated translations?"></a>What about duplicated translations?</h2><p>Yes, another surprise that I encountered was this fact that “supposedly” was “impossible” to happen. But code does not lie!</p>
+<p>Example:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;my awesome translation&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;translationId1&#x27;</span> =&gt; <span class="string">&#x27;whatever translation&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>So…</p>
+<h3 id="Iteration-3"><a href="#Iteration-3" class="headerlink" title="Iteration 3:"></a>Iteration 3:</h3><p>How can I handle this new scenario? Which value do I have to take? Two possible answers came to my mind:</p>
+<ol>
+<li>Doing a <code>str_pos() (string contains method)</code> to check if it is already “concatenated”</li>
+<li>Having some “cache”</li>
+</ol>
+<p>After implementing both proposals, I decided to use the second one. Due to the access of an array (hash) is <code>O(1)</code> where the hashkey was the union of the <em>$filename</em> and the <em>$translationId</em> so I can avoid duplicates. This solution raised a bit the <strong>memory usage</strong> but it also <strong>decreased the execution time</strong> due to the skipped translations.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Total time in seconds&quot;</span>    <span class="punctuation">:</span>  <span class="number">188.28873109818</span><span class="punctuation">,</span>      # <span class="number">3</span><span class="punctuation">,</span><span class="number">13</span> minutes </span><br><span class="line">    <span class="attr">&quot;Function time in seconds&quot;</span> <span class="punctuation">:</span>  <span class="number">35.77</span><span class="punctuation">,</span>                # <span class="number">445</span>/<span class="number">36</span> ≈ x12 times faster</span><br><span class="line">    <span class="attr">&quot;Peak memory usage in MB&quot;</span>  <span class="punctuation">:</span>  <span class="number">209.34106445312</span>       # <span class="number">209</span>/<span class="number">79</span> ≈ x2<span class="punctuation">,</span><span class="number">6</span> increase of memory usage</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>At this time, I found that these duplicated translations had different values and with this solution I am taking the first one instead of the last one (because it was overwritten in the original code). So the solution for this new “problem” is to normalize all translations.</p>
+<h2 id="Validations"><a href="#Validations" class="headerlink" title="Validations"></a>Validations</h2><p>How to validate that the actual output (remember that they are files with some content) is the same as the previous one to be able to replace it with the new algorithm? Well, I found a utility via command line that helped me:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -r -C 1 --suppress-common-lines directory1 directory2</span><br></pre></td></tr></table></figure>
+
+<p>And when there are differences, it shows a message like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*** es_ES/MESSAGES/filename1</span><br><span class="line">--- es_ES/MESSAGES/filename1</span><br><span class="line">***************</span><br><span class="line">*** 52,54 ****</span><br><span class="line">  &quot;my awesome translation&quot;</span><br><span class="line">--- 52,54 ----</span><br><span class="line">! &quot;whatever translation&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>It has been an entertaining exercise full of unexpected surprises and learnings that I enjoyed a lot. Also, I put into practice my knowledge about “algorithms design” and could validate it with real numbers. I’m very happy with the final solution.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+    <hr />
+    <h3>Comments:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/JoseDeniz13" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/JoseDeniz/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/jose-manuel-deniz-suarez/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Jose M. Deniz<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'josedenizblog';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+
+</html>

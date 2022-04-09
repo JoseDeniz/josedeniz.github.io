@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Hoy escribiré sobre cómo montarte un pequeño servicio web usando Spark y posteriormente haciendo un despligue en Heroku.
+Lo primero que tenemos que ha"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Jose M. Deniz"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Java - Implementar un WebService con Spark y despligue en heroku"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Hoy escribiré sobre cómo montarte un pequeño servicio web usando Spark y posteriormente haciendo un despligue en Heroku.
+Lo primero que tenemos que ha"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="An Apprentice Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://josemanueldeniz.es/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Java - Implementar un WebService con Spark y despligue en heroku - An Apprentice Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">JoseDeniz Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Java - Implementar un WebService con Spark y despligue en heroku</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2016-09-27
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Spark/">#Spark</a> <a href="/tags/Heroku/">#Heroku</a> <a href="/tags/Java/">#Java</a> <a href="/tags/Java8/">#Java8</a> <a href="/tags/WebServices/">#WebServices</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Java/">Java</a>/ <a href="/categories/Java/Java-8/">Java 8</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Hoy escribiré sobre cómo montarte un pequeño servicio web usando <a target="_blank" rel="noopener" href="http://sparkjava.com/">Spark</a> y posteriormente haciendo un despligue en <a target="_blank" rel="noopener" href="https://www.heroku.com/">Heroku</a>.</p>
+<p>Lo primero que tenemos que hacer es:</p>
+<ul>
+<li>Crearnos una <a target="_blank" rel="noopener" href="https://signup.heroku.com/dc">cuenta</a> en Heroku</li>
+<li>Instalar el <a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/heroku-command-line">Heroku Toolbelt</a></li>
+<li>Por último, crear un proyecto maven nuevo y configurar el pom.xml.</li>
+</ul>
+<script src="https://gist.github.com/JoseDeniz/9a008fc4b052ec3917ad51e244e9c583.js"></script>
+
+<p>Ahora queda configurar el puerto de heroku para que funcione correctamente, lo haremos en nuestra clase que contenga el main:</p>
+<script src="https://gist.github.com/JoseDeniz/536ac258c942ec6a22515eec192d8248.js"></script>
+
+<p>Una vez configurado todo, tenemos que crear nuestros controladores y luego instanciarlos en nuestra clase que contenga el main. Por ejemplo, un HelloWorldController:</p>
+<script src="https://gist.github.com/JoseDeniz/5fbed17a5490ecf46c3193e4adebd15b.js"></script>
+
+<p>Por último, tenemos que tener creado el fichero Procfile (en el root del proyecto) ya que es necesario para Heroku con la siguiente línea:</p>
+<pre><code>web:  java -cp target/classes:target/dependency/* paquete_del_proyecto.main_class
+</code></pre>
+<p>Con esto ya tenemos el código mínimo para empezar, para probarlo basta con ir al navegador y poner <strong>localhost:4567&#x2F;hello</strong> y veremos <strong>{“message”: “Hello World!”}</strong></p>
+<p>Ahora toca el despligue en heroku, abrimos nuestra terminal:</p>
+<pre><code>$ heroku login
+$ git init (si no se ha creado el repositorio)
+$ heroku git:remote -a *nombre-de-la-app-en-heroku*
+$ git commit -am &quot;deploy&quot;
+$ git push heroku master (Heroku se encarga de hacer el deploy al hacer push)
+</code></pre>
+<p>Con esto ya tenemos nuestro servidor desplegado, por lo que podemos ir al navegador, poner ** <em>nombre-de-la-app-en-heroku</em>.herokuapp.com** y verificar que funciona correctamente.</p>
+<blockquote>
+<p>Si no funciona, uno de los motivos puede ser que tengamos nuestro dyno apagado, basta con ir a Resources, en la página de administración de nuestra aplicación en Heroku, y darle al “switch” para encenderlo.</p>
+</blockquote>
+<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><ul>
+<li>Repositorio en <a target="_blank" rel="noopener" href="https://github.com/JoseDeniz/SparkHerokuHelloWorld">GitHub</a></li>
+</ul>
+<h2 id="Extras"><a href="#Extras" class="headerlink" title="Extras"></a>Extras</h2><h3 id="Anadir-ficheros-estaticos"><a href="#Anadir-ficheros-estaticos" class="headerlink" title="Añadir ficheros estáticos:"></a>Añadir ficheros estáticos:</h3><p>Lo primero que tenemos que hacer es añadir lo siguiente a la hora de inicializar nuestro servidor.</p>
+<script src="https://gist.github.com/JoseDeniz/8af324aed2516a83f6629c74bc28a62c.js"></script>
+
+<p>Luego podemos crear un index.html sencillo y un js para que haga una petición ajax usando jquery, por ejemplo:</p>
+<script src="https://gist.github.com/JoseDeniz/b60f5cd7cdb5a7a4eb26b5b8e9c2a377.js"></script>
+
+<script src="https://gist.github.com/JoseDeniz/8d146aff8671e453d3b8732dba49dc7d.js"></script>
+
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>Puede que nos de problemas el CORS, por lo que podemos crearnos una clase auxiliar que trate con esto:</p>
+<script src="https://gist.github.com/JoseDeniz/98c158564ba6d87ad86995f508c19c75.js"></script>
+
+<p>Y llamarlo antes de la creación de nuestra ruta, por ejemplo:</p>
+<script src="https://gist.github.com/JoseDeniz/44042e1ddd380e066967e7e5057e192c.js"></script>
+
+<p>Así quedaría nuestra jerarquía del proyecto:</p>
+<div style="text-align: center;">
+  <img src="/img/project_hierarchy.png" alt="project_hierarchy.png"/>
+</div>
+
+<p>Verificamos que se muestra <em>Hello World!</em> en el navegador, si es así, ya tenemos todo terminado y funcionando perfectamente.</p>
+<h3 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h3><p>Por ejemplo, podemos hacer un test de integración donde hagamos una petición a nuestra ruta y verificar que el mensaje nos llega correctamente:</p>
+<script src="https://gist.github.com/JoseDeniz/3f8b002ea6280580b15c7382672ab7d3.js"></script>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+    <hr />
+    <h3>Comments:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/JoseDeniz13" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/JoseDeniz/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/jose-manuel-deniz-suarez/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Jose M. Deniz<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'josedenizblog';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+
+</html>
